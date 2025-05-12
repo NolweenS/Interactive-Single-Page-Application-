@@ -15,7 +15,7 @@ async function fetchData() {
     // const response wacht dat fetchData de data bij de API heeft opgehaald 
     const response = await fetch(API_URL);
 
-// hier gaan we de response van de API_URL omzetten naar Json-data, om het later makkelijker te gebruiken 
+    // hier gaan we de response van de API_URL omzetten naar Json-data, om het later makkelijker te gebruiken 
     const data = await response.json();
 
     //Hier gaan we de data uitprinten om na te kijken of alles klopt (debuggen)
@@ -24,25 +24,28 @@ async function fetchData() {
 
     // we maken een forEach zodat we over de producten kunnen lopen en ze aan de tabel kunnen toevoegen
     data.forEach(product => {
-      const tableRow = document.createElement("tr");
+      const productCard = document.createElement("div");
+      productCard.classList.add("product-card");
 
-      tableRow.innerHTML = `
-      <td>${product.name}</td>
-      <td>${product.price}</td>
-      <td>${product.brand}</td>
-      <td>${product.product_type}</td>
-      <td>${product.description || " geen descriptie beschikbaar"}</td>
-      <td> <img src= "${product.image_link || "placeholder.jpg"}" alt="${product.name}" width="50" /></td>
+// we maken van de informatie deel een product card zodat het overzichtelijker is 
+      productCard.innerHTML = `
+
+    <img src = "${product.image.link || "placeholder.jpg"}" alt= "${product.name}" width="100" />
+    <h3>${product.name}</h3>
+    <p> Prijs: €${product.price || "?"}</p>
+    <p>Merk: ${product.brand}</p>
+    <p>Type: ${product.product_type}</p>
+    <p>${product.description || "Geen beschrijving beschikbaar"}</p>
 
       `;
-      dataList.appendChild(tableRow);
+      dataList.appendChild(productCard);
     })
 
 
 
-    
+
   } catch (error) {
-// Bij een fout melding wordt het hier opgenomen en kunnen we het met de console bekijken
+    // Bij een fout melding wordt het hier opgenomen en kunnen we het met de console bekijken
     console.error(" Er ging iets mis bij het ophalen: " + error);
 
   }
