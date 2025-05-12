@@ -1,26 +1,40 @@
-
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mijn Eeerste Project</title>
-  </head>
-  <body>
-    <!--select id="product-type">
-      <option value="blush">Blush</option>
-      <option value="foundation">foundation</option>
-      <option value="lipstick">Lipstick</option>
-      <option value="eyeshadow"> Eyeshadow</option>
-    </select>
-    
-    <ul id="data-list"></ul>
 
-<script type="module" src="src/main.js"></script!-->
-     <h1>Maybelline Producten</h1>
-    <ul id="product-list">
-    </ul>      
-<script type="module" src="src/main.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mijn Eeerste Project</title>
+</head>
 
-  </body>
+<body>
+
+<!-- We maken een tabel aan om de producten duidelijker te laten tonen en tonen we 6 kolommen -->
+  <table id="product-table">
+    <thead>
+      <tr>
+        <th>Naam</th>
+
+        <th>Prijs</th>
+
+        <th>Merk</th>
+
+        <th>Type</th>
+
+        <th>Beschrijving</th>
+
+        <th>Afbeelding</th>
+
+      </tr>
+
+    </thead>
+<!-- Hier wordt de data opgeslegen en kunnen we de producten terug vinden -->
+    <tbody id="data-list"></tbody>
+
+  </table>
+
+  <script type="module" src="./src/main.js"></script>
+
+</body>
+
 </html>
