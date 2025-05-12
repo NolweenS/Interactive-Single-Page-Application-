@@ -25,19 +25,22 @@ async function fetchData() {
     // we maken een forEach zodat we over de producten kunnen lopen en ze aan de tabel kunnen toevoegen
     data.forEach(product => {
       const productCard = document.createElement("div");
+      // Hier voegen we de product class
       productCard.classList.add("product-card");
 
-// we maken van de informatie deel een product card zodat het overzichtelijker is 
+      //sommoge beschrijving onderdelen zijn onderverdeeld en deze gaan we hier aan passen zodat het visueel overzichterlijker is 
+
+      
+      // we maken van de informatie deel een product card zodat het overzichtelijker is 
       productCard.innerHTML = `
 
-    <img src = "${product.image.link || "placeholder.jpg"}" alt= "${product.name}" width="100" />
+    <img src = "${product.image_link || "placeholder.jpg"}" alt= "${product.name}" width="100" />
     <h3>${product.name}</h3>
     <p> Prijs: €${product.price || "?"}</p>
     <p>Merk: ${product.brand}</p>
     <p>Type: ${product.product_type}</p>
-    <p>${product.description || "Geen beschrijving beschikbaar"}</p>
-
-      `;
+     <p><strong>Beschrijving: </strong> ${product.description || "Geen beschrijving beschikbaar"}</p>
+  `;
       dataList.appendChild(productCard);
     })
 
