@@ -16,6 +16,9 @@ const priceMaxInput = document.getElementById("price-max");
 const maxPriceValue = document.getElementById("max-price-value");
 const applyFilterButton = document.getElementById("apply-filter");
 
+
+const sortPriceButton = document.getElementById("sort-price-low-high");
+
 // we willen de data altijd opneiuw roepen das niet effciente dus we bewaren het data hier zodat we bij het filtreren,sorter,.. eenvoudiger data kunnen ophalen
 let allProducts = [];
 
@@ -85,10 +88,24 @@ maxPriceValue.textContent = maxPrice;
     }
   );
 
-  toonProducten(filtered)
+ 
+
+  toonProducten(filtered);
 
 
 }
+ function sorteerPrijsLaagste(){
+    const sorted = [...allProducts].sort((a,b) =>{
+    const prijsA = parseFloat(a.price);
+    const prijsB = parseFloat(b.price);
+    if(isNaN(prijsA)) 
+      return 1;
+    if (isNaN(prijsB))
+      return -1;
+    return prijsA-prijsB;
+  });
+toonProducten(sorted);
+  }
 
   // we zetten een event listener hier zodat de filteroptie kan veranderen en we geven aan dat we een verandering willen nadat we op het knop hebben geklikd
 
@@ -96,7 +113,7 @@ maxPriceValue.textContent = maxPrice;
     maxPriceValue.textContent = priceMaxInput.value});
   applyFilterButton.addEventListener("click",zetFilters);
   filterType.addEventListener("change", zetFilters);
-  
+  sortPriceButton.addEventListener("click",sorteerPrijsLaagste);
 
 
 
