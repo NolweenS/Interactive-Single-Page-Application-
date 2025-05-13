@@ -12,18 +12,25 @@ const dataList = document.getElementById("data-list");
 
 const filterType = document.getElementById("filter-type");
 
+const priceMaxInput = document.getElementById("price-max");
+const maxPriceValue = document.getElementById("max-price-value");
+const applyFilterButton = document.getElementById("apply-filter");
+
 // we willen de data altijd opneiuw roepen das niet effciente dus we bewaren het data hier zodat we bij het filtreren,sorter,.. eenvoudiger data kunnen ophalen
 let allProducts = [];
 
 
 async function fetchData() {
-    try{
+
+     try{
         // const response wacht dat fetchData de data bij de API heeft opgehaald 
       const response = await fetch(API_URL);
       
     // hier gaan we de response van de API_URL omzetten naar Json-data, om het later makkelijker te gebruiken 
       const data = await response.json();
       allProducts = data;
+      toonProducten(data);
+
        //Hier gaan we de data uitprinten om na te kijken of alles klopt (debuggen)
       console.log(data);
       toonProducten(data);
@@ -56,20 +63,41 @@ async function fetchData() {
 
   }
 
-  // Hier maken we een functie om de producten te kunen filteren 
-  function zetFilters() {
+
+  // Hier maken we een filteroptie waarin we een schuifbalk gebruiken voor onze minimun -en maximum prijs en de filter op type product wordt hier bij gezet
+function zetFilters(){
+
+ 
   const selectedType = filterType.value;
+  const maxPrice = parseFloat(priceMaxInput.value);
+
+maxPriceValue.textContent = maxPrice;
+
   let filtered = allProducts;
 
-  if (selectedType) {
+  if(selectedType){
     filtered = filtered.filter(product => product.product_type === selectedType);
   }
 
-  toonProducten(filtered);
+  filtered = filtered.filter( product=>{
+      const prijs = parseFloat(product.price);
+      return !isNaN(prijs) &&  prijs <= maxPrice;
+    }
+  );
+
+  toonProducten(filtered)
+
+
 }
 
-  // we zetten een event listener hier zodat de filteroptie kan veranderen
+  // we zetten een event listener hier zodat de filteroptie kan veranderen en we geven aan dat we een verandering willen nadat we op het knop hebben geklikd
+
+  priceMaxInput.addEventListener("input", () => {
+    maxPriceValue.textContent = priceMaxInput.value});
+  applyFilterButton.addEventListener("click",zetFilters);
   filterType.addEventListener("change", zetFilters);
+  
+
 
 
 

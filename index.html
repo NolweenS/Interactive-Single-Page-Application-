@@ -8,36 +8,41 @@
 </head>
 
 <body>
-
   <!-- we maken een div zodat we flexibel  kunnen omgaan en een grid toevoegen-->
-  
   <div id="product-overview">
     <h1>NYX PRODUCTEN </h1>
-    <div id ="data-list"></div>
+
+    <!-- We gaan hier onze filteroptie zetten, waarin we de producten zullen filteren op 'type' product-->
+
+    <div id="filter-bar">
+      <label for="filter-type"> Filter op type: </label>
+
+      <select id="filter-type">
+
+        <option value="">Alle Producten</option>
+        <option value="blush">blush</option>
+        <option value="bronzer">Bronzer</option>
+        <option value="eyebrow">Eyebrow</option>
+        <option value="eyeshadow">Eyeshadow</option>
+        <option value="foundation">Foundation</option>
+        <option value="lip_liner">Lip Liner</option>
+        <option value="lipstick">Lipstick</option>
+        <option value="mascara">Mascara</option>
+        <option value="eyeliner">Eyeliner</option>
+
+      </select>
+
+      <label for="price-max"> Maximale prijs: € <span id="max-price-value"> 20</span></label>
+      <input type="range" id="price-max" min="0" max="20" step="1" value=" 20 ">
+      <button id="apply-filter"> Apply Filter </button>
+
+
+    </div>
+    <div id="data-list"></div>
+
   </div>
-
-   <!-- We gaan hier onze filteroptie zetten, waarin we de producten zullen filteren op 'type' product-->
   
-   <div>
-    <label for="filter-type"> Filter op type: </label>
-  
-    <select id="filter-type">
 
-         <option value="">Alle Producten</option>
-      <option value="blush">blush</option>
-      <option value="bronzer">Bronzer</option>
-      <option value="eyebrow">Eyebrow</option>
-      <option value="eyeshadow">Eyeshadow</option>
-      <option value="foundation">Foundation</option>
-      <option value="lip_liner">Lip Liner</option>
-      <option value="lipstick">Lipstick</option>
-      <option value="mascara">Mascara</option>
-      <option value="eyeliner">Eyeliner</option>
-      
-    </select>
-
-   </div>
-  
 
   <script type="module" src="./src/main.js"></script>
 
