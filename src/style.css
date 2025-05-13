@@ -1,8 +1,88 @@
 /* De algemene pagina opstellen*/
 
- body{
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #EDE9E3;
-margin: 2em;
-padding:0;
-}*/
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #EDE9E3; 
+  padding: 0;
+}
+
+/* We gaan hier onze "product-overview" stylen er is een andere achtergrondkleur om een verschil te maken en een lichte shaduw */
+
+#product-overview {
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fffaf1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Hier wordt de h1 'NYX Producten bewerkt '*/
+
+#product-overview h1{
+  text-align: center;
+  color: #6c584c;
+}
+
+/* Hier gaan we onze grid layout aanmakenn, we gaan de kolommen laten repeat en zorgen dat de inhoud mooi samen blijft */
+#data-list{
+display: grid;
+grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+gap: 20px;
+padding: 20px;
+
+}
+ 
+/* we hebben onze grid style gegeven en een transition bijgezet vor de hover-effect*/
+
+.product-card{
+  border: 1px solid ;
+  border-color: #fffaf1;
+  border-radius: 15px;
+  background-color: white;
+  padding: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  text-align: center;
+transition: transform 0,3s ease, box-shadow 0.3s ease;
+}
+
+/* we gaan een hover effect maken zodat we met de muis erover kunnen gaan*/
+
+.product-card:hover{
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); 
+}
+
+
+/* we moeten ervoor zorgen dat de afbeelding in de border blijft en niet te ver gaat */
+
+.product-card img{
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+/* We hebben titel een mooier layout gegeven */
+.product-card h3 {
+  font-size: 1.5em;
+color: #6c584c;
+margin: 10px;
+}
+
+/* Hier wordt de h1 'NYX Producten bewerkt '*/
+.product-card p{
+
+  font-size: 0.9em;
+  line-height: 1.4;
+
+}
+
+.product-card p strong{
+  font-weight: bold;
+  
+}
+
+
+/* Hier gaan we de media queries maken om de web pagina responsive te maken*/
+
+
+
