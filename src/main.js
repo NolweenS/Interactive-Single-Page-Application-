@@ -16,8 +16,10 @@ const priceMaxInput = document.getElementById("price-max");
 const maxPriceValue = document.getElementById("max-price-value");
 const applyFilterButton = document.getElementById("apply-filter");
 
-
+// hier plaatsen we onze sorteer constante
 const sortPriceButton = document.getElementById("sort-price-low-high");
+//hier plaatsen we onze resetknop
+const resetButton = document.getElementById("reset-button");
 
 // we willen de data altijd opneiuw roepen das niet effciente dus we bewaren het data hier zodat we bij het filtreren,sorter,.. eenvoudiger data kunnen ophalen
 let allProducts = [];
@@ -107,6 +109,12 @@ maxPriceValue.textContent = maxPrice;
 toonProducten(sorted);
   }
 
+  function resetFilters(){
+    filterType.value = ''; // de keuze van onze product type resetten
+    priceMaxInput.value = priceMaxInput.max; //onze schuifbalk resetten
+    toonProducten(allProducts);
+}
+
   // we zetten een event listener hier zodat de filteroptie kan veranderen en we geven aan dat we een verandering willen nadat we op het knop hebben geklikd
 
   priceMaxInput.addEventListener("input", () => {
@@ -114,6 +122,7 @@ toonProducten(sorted);
   applyFilterButton.addEventListener("click",zetFilters);
   filterType.addEventListener("change", zetFilters);
   sortPriceButton.addEventListener("click",sorteerPrijsLaagste);
+  resetButton.addEventListener("click",resetFilters);
 
 
 
