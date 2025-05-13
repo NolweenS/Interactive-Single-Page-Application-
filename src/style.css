@@ -84,5 +84,41 @@ margin: 10px;
 
 /* Hier gaan we de media queries maken om de web pagina responsive te maken*/
 
+@media  (max-width:600px){
 
+  body{
+    padding: 10px;
+  }
+
+  #product-overview{
+    padding: 10px;
+  }
+  
+  .product-card {
+    font-size: 15px;
+    padding: 10px;
+  margin: 20px;;
+  }
+
+  .product-card img {
+    width: 100%;
+
+  }
+
+
+
+}
+  
+
+@media  (min-width:601px ) and (max-width:900px){
+  
+  #data-list{
+    grid-template-columns: repeat(2,1fr);
+  }
+  
+  .product-card{
+    font-size: 17px;
+    padding: 15px;
+  }
+}
 
