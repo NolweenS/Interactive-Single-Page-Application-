@@ -83,7 +83,24 @@ margin: 10px;
 
 /* Hier komen de eigenschappen voor de thema mode*/
 
-.thema-selector{
+#product-overview{
+  background-color: var(--card-background);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#thema-select, #search-input, #filter-type, #price-max {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+button {
+  background-color: var(--card-background);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+}
+
+.theme-selector{
   margin-bottom: 15px;
   display: flex;
 align-items: center;
@@ -103,6 +120,13 @@ gap:10px
   --text-color: #333333;
   --card-background: #f9f9f9;
   --border-color: #dddddd;
+}
+
+.dark-theme{
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --card-background: #1e1e1e;
+  --border-color: #444444;
 }
 
 body{

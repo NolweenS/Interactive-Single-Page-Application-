@@ -91,6 +91,7 @@ async function fetchData() {
 
   // Hier komt de functie om van thema te veranderen 
   function changeTheme(){
+    console.log("thema wordt gewijzigd naar:",themaSelect.value);
     if(themaSelect.value === "dark"){
     document.body.classList.add("dark-theme");
   }else {
@@ -118,6 +119,7 @@ async function fetchData() {
 
   }
 
+  // hier gaan de onze functie voor de zoekbalk weergeven 
   function zoekProducten(){
     const zoekTerm = searchInput.value.toLowerCase();
     console.log("zoekTerm:",zoekTerm);
@@ -208,16 +210,68 @@ toonProducten(sorted);
   function resetFilters(){
     filterType.value = ''; // de keuze van onze product type resetten
     priceMaxInput.value = priceMaxInput.max; //onze schuifbalk resetten
+    maxPriceValue.textContent = priceMaxInput.max;
     searchInput.value = "" //zoekbalk resetten
     toonProducten(allProducts);
+    saveFilters();
 }
+
+
+// we maken een functie om de filters van de gebruiker op te slaan 
+function saveFilters(){
+  const filters = {
+    productType: filterType.value,
+    maxPrice: priceMaxInput.value
+  };
+  
+  localStorage.setItem("makeup-filters",JSON.stringify(filters));
+}
+
+// Deze functie gaat de opgeslagen filters op laden
+function loadFilters(){
+  try{
+    const savedFilters = localStorage.getItem("makeup-filters");
+
+    if(savedFilters){
+      const filters = JSON.parse(saveFilters);
+
+      if(filterType.productType){
+        filterType.value = filters.productType;
+      }
+      if (filters.maxPrice){
+        priceMaxInput.value = filters.maxPrice;
+        maxPriceValue.textContent = filters.maxPrice;
+      }
+      zetFilters();
+      }
+    }catch(error){
+      console.error("Error loading filters:", error);
+    }
+  }
+
 
   // we zetten een event listener hier zodat de filteroptie kan veranderen en we geven aan dat we een verandering willen nadat we op het knop hebben geklikt, voegen onze event listener hier zodat al de mogelijke veranderingen samen worden gevoeg 
 
   priceMaxInput.addEventListener("input", () => {
     maxPriceValue.textContent = priceMaxInput.value});
-  applyFilterButton.addEventListener("click",zetFilters);
-  filterType.addEventListener("change", zetFilters);
+    
+    priceMaxInput.addEventListener("change", () =>{
+      zetFilters();
+      saveFilters();
+    })
+
+  applyFilterButton.addEventListener("click", 
+    () => {zetFilters();
+  saveFilters();
+});
+
+
+  filterType.addEventListener("change", ()=>{zetFilters();
+    saveFilters();
+  });
+
+  
+
   sortPriceButton.addEventListener("click",sorteerPrijsLaagste);
   resetButton.addEventListener("click",resetFilters);
   searchButton.addEventListener("click",zoekProducten);
@@ -228,6 +282,7 @@ toonProducten(sorted);
   });
 
   document.addEventListener("DOMContentLoaded",loadThemePreference);
+  document.addEventListener("DOMContentLoaded",loadFilters);
 
 
 
