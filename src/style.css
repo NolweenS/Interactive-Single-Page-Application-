@@ -81,6 +81,41 @@ margin: 10px;
   
 }
 
+/* Hier komen de eigenschappen voor de thema mode*/
+
+.thema-selector{
+  margin-bottom: 15px;
+  display: flex;
+align-items: center;
+gap:10px
+}
+
+#thema-select{
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: 1px solid var(--border-color); /* we gebruiken een var() functie om ons vorige eigenschappen op te halen zodat we het niet dubbel of anders moeten formuleren*/
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+:root{
+  --background-color: #ffffff;
+  --text-color: #333333;
+  --card-background: #f9f9f9;
+  --border-color: #dddddd;
+}
+
+body{
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.product-card{
+  background-color: var(--card-background);
+  border: 1px solid var(--background-color);
+}
+
 
 /* Hier gaan we de media queries maken om de web pagina responsive te maken*/
 
@@ -121,4 +156,5 @@ margin: 10px;
     padding: 15px;
   }
 }
+
 
