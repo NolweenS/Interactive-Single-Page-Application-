@@ -24,6 +24,10 @@ const resetButton = document.getElementById("reset-button");
 const searchInput = document.getElementById("search-input");
 const searchButton = document.getElementById("search-button");
 
+// De element voor de thema-selector
+const themaSelect = document.getElementById("thema-select");
+
+
 // we willen de data altijd opneiuw roepen das niet effciente dus we bewaren het data hier zodat we bij het filtreren,sorter,.. eenvoudiger data kunnen ophalen
 let allProducts = [];
 
@@ -82,6 +86,35 @@ async function fetchData() {
   dataList.appendChild(productCard);
     });
     
+
+  }
+
+  // Hier komt de functie om van thema te veranderen 
+  function changeTheme(){
+    if(themaSelect.value === "dark"){
+    document.body.classList.add("dark-theme");
+  }else {
+    document.body.classList.remove("dark-theme");
+  }
+
+  localStorage.setItem("theme-preference", themaSelect.value);
+  }
+
+  // Event listener voor de thema-selector
+  themaSelect.addEventListener("change",changeTheme)
+
+  //We maken een functie om de opgelasgen voorkeur bij het laden van de pagina
+
+  function loadThemePreference(){
+    const savedTheme = localStorage.getItem("theme-preference");
+
+    if(savedTheme){
+      themaSelect.value = savedTheme;
+
+      if(savedTheme === "dark"){
+        document.body.classList.add("dark-theme");
+      }
+    }
 
   }
 
@@ -194,6 +227,7 @@ toonProducten(sorted);
     }
   });
 
+  document.addEventListener("DOMContentLoaded",loadThemePreference);
 
 
 
