@@ -8,9 +8,24 @@
 </head>
 
 <body>
-  <!-- we maken een div zodat we flexibel  kunnen omgaan en een grid toevoegen-->
+  <!-- we maken een div zodat we flexibel kunnen omgaan en een grid toevoegen-->
   <div id="product-overview">
     <h1>NYX PRODUCTEN </h1>
+
+    <!-- We gaan hier onze zoekbalk plaatsen -->
+    <div id="search-container">
+      <input type="text" id="search-input" placeholder=" Zoek product...">
+      <button id="search-button"> Zoeken</button>
+    </div>
+
+     <!-- We gaan onze aantal resultaten optellen en bijhouden-->
+      <div id="results-counter">Resultaten: <span id="count">0</span></div>
+
+       <!--Geen resultatt bericht-->
+       <div id="no-results" style="display: none;">
+        <p>Geen producten gevonden die aan je zoekcriteria voldoen</p>
+      </div>
+
 
     <!-- We gaan hier onze filteroptie zetten, waarin we de producten zullen filteren op 'type' product-->
 
@@ -44,6 +59,7 @@
 
   </div>
   
+
 
 
   <script type="module" src="./src/main.js"></script>

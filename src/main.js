@@ -21,6 +21,9 @@ const sortPriceButton = document.getElementById("sort-price-low-high");
 //hier plaatsen we onze resetknop
 const resetButton = document.getElementById("reset-button");
 
+const searchInput = document.getElementById("search-input");
+const searchButton = document.getElementById("search-button");
+
 // we willen de data altijd opneiuw roepen das niet effciente dus we bewaren het data hier zodat we bij het filtreren,sorter,.. eenvoudiger data kunnen ophalen
 let allProducts = [];
 
@@ -47,7 +50,21 @@ async function fetchData() {
   }
 
   function toonProducten(products){
+    console.log("Showing products:",products.length);
     dataList.innerHTML = ""; //geen spatie
+
+    // We gaan de reultaat teller updaten na zoek resultaat
+    const countElement = document.getElementById("count");
+    countElement.textContent = products.length;
+
+    //we gaan controleren of er een resultaat is 
+    const noResultsElement = document.getElementById("no-results");
+    if (products.length === 0){
+      noResultsElement.style.display = "block";
+    } else{
+      noResultsElement.style.display = "none";
+    }
+
 // een forEach loop zodat het over alle producten gaat lopen 
     products.forEach(product => {
       const productCard = document.createElement("div");
@@ -57,7 +74,7 @@ async function fetchData() {
 
     <img src = "${product.image_link || "placeholder.jpg"}" alt= "${product.name}" width="100" />
     <h3>${product.name}</h3>
-    <p> Prijs: €${product.price || "?"}</p>
+    <p>Prijs: €${product.price || "?"}</p>
     <p>Merk: ${product.brand}</p>
     <p>Type: ${product.product_type}</p>
      <p><strong>Beschrijving: </strong> ${product.description || "Geen beschrijving beschikbaar"}</p>
@@ -65,6 +82,49 @@ async function fetchData() {
   dataList.appendChild(productCard);
     });
     
+
+  }
+
+  function zoekProducten(){
+    const zoekTerm = searchInput.value.toLowerCase();
+    console.log("zoekTerm:",zoekTerm);
+
+    // als de zoekterm leeg is,tonn alle producten
+    if(zoekTerm === ""){
+      zetFilters();
+      return;
+    }
+
+    // we filteren de producten op basis van de zoekterm, maar we moeten controleren of de eigenschappen wel bestaan voordat je ze gebruikt
+
+    let gezochteProducten = allProducts.filter(product =>{
+   const nameMatch = product.name ? product.name.toLowerCase().includes(zoekTerm) : false;
+   const descMatch = product.description ? product.description.toLowerCase().includes(zoekTerm) : false;
+   const typeMatch = product.product_type ? product.product_type.toLowerCase().includes(zoekTerm) : false;
+ 
+   return nameMatch || descMatch || typeMatch;
+
+    });
+
+    console.log("producten na zoeken filter:", gezochteProducten.map(product => product.product_type));
+    
+    const selectedType = filterType.value;
+    const maxPrice = parseFloat(priceMaxInput.value);
+    
+    // Filter op type als er een type is geselecteerd
+    if(selectedType){
+      gezochteProducten = gezochteProducten.filter(product => product.product_type === selectedType);
+    }
+
+    //filter op prijs
+    gezochteProducten = gezochteProducten.filter(product =>{
+      const prijs = parseFloat(product.price);
+      return !isNaN(prijs) && prijs <= maxPrice;
+    });
+
+    console.log("Gefilterde producten:", gezochteProducten.length);
+
+    toonProducten(gezochteProducten);
 
   }
 
@@ -96,6 +156,8 @@ maxPriceValue.textContent = maxPrice;
 
 
 }
+
+//We sorteren op prijs van kleinste prijs naar hoogtse prijs 
  function sorteerPrijsLaagste(){
     const sorted = [...allProducts].sort((a,b) =>{
     const prijsA = parseFloat(a.price);
@@ -109,13 +171,15 @@ maxPriceValue.textContent = maxPrice;
 toonProducten(sorted);
   }
 
+
   function resetFilters(){
     filterType.value = ''; // de keuze van onze product type resetten
     priceMaxInput.value = priceMaxInput.max; //onze schuifbalk resetten
+    searchInput.value = "" //zoekbalk resetten
     toonProducten(allProducts);
 }
 
-  // we zetten een event listener hier zodat de filteroptie kan veranderen en we geven aan dat we een verandering willen nadat we op het knop hebben geklikd
+  // we zetten een event listener hier zodat de filteroptie kan veranderen en we geven aan dat we een verandering willen nadat we op het knop hebben geklikt, voegen onze event listener hier zodat al de mogelijke veranderingen samen worden gevoeg 
 
   priceMaxInput.addEventListener("input", () => {
     maxPriceValue.textContent = priceMaxInput.value});
@@ -123,6 +187,12 @@ toonProducten(sorted);
   filterType.addEventListener("change", zetFilters);
   sortPriceButton.addEventListener("click",sorteerPrijsLaagste);
   resetButton.addEventListener("click",resetFilters);
+  searchButton.addEventListener("click",zoekProducten);
+  searchInput.addEventListener("keyup", function(event){
+    if(event.key === "Enter"){
+      zoekProducten();
+    }
+  });
 
 
 
