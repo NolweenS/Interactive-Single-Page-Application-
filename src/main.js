@@ -45,7 +45,7 @@ async function fetchData() {
 
        //Hier gaan we de data uitprinten om na te kijken of alles klopt (debuggen)
       console.log(data);
-      toonProducten(data);
+
     }catch (error){
       // Bij een fout melding wordt het hier opgenomen en kunnen we het met de console bekijken
       console.error(" Er ging iets mis bij het ophalen: " + error);
@@ -76,7 +76,7 @@ async function fetchData() {
       // we zetten onze innerhtml die we in de vorige stap hebben gemaakt hier zodat de filteroptie hier op kan werken
   productCard.innerHTML = `
 
-    <img src = "${product.image_link || "placeholder.jpg"}" alt= "${product.name}" width="100" />
+    <img src = "${product.image_link || "public\placeholder_300x150.jpg"}" alt= "${product.name}" width="100" />
     <h3>${product.name}</h3>
     <p>Prijs: €${product.price || "?"}</p>
     <p>Merk: ${product.brand}</p>
@@ -233,7 +233,7 @@ function loadFilters(){
     const savedFilters = localStorage.getItem("makeup-filters");
 
     if(savedFilters){
-      const filters = JSON.parse(saveFilters);
+      const filters = JSON.parse(savedFilters);
 
       if(filterType.productType){
         filterType.value = filters.productType;

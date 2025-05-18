@@ -2,8 +2,10 @@
 
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #EDE9E3; 
   padding: 0;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
 }
 
 /* We gaan hier onze "product-overview" stylen er is een andere achtergrondkleur om een verschil te maken en een lichte shaduw */
@@ -12,7 +14,7 @@ body {
   max-width: 1200px;
   margin: 20px auto;
   padding: 20px;
-  background-color: #fffaf1;
+  background-color: var(--overview-background);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -31,6 +33,17 @@ gap: 20px;
 padding: 20px;
 
 }
+
+button:hover{
+  background-color: #6c584c;
+  color: white;
+  cursor: pointer;
+}
+
+
+#price-max ::-webkit-slider-thumb{
+background-color: #6c584c;
+}
  
 /* we hebben onze grid style gegeven en een transition bijgezet vor de hover-effect*/
 
@@ -42,7 +55,7 @@ padding: 20px;
   padding: 20px;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   text-align: center;
-transition: transform 0,3s ease, box-shadow 0.3s ease;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 /* we gaan een hover effect maken zodat we met de muis erover kunnen gaan*/
@@ -58,6 +71,7 @@ transition: transform 0,3s ease, box-shadow 0.3s ease;
 .product-card img{
   max-width: 100%;
   height: auto;
+  object-fit: cover;
   border-radius: 5px;
 }
 
@@ -84,7 +98,7 @@ margin: 10px;
 /* Hier komen de eigenschappen voor de thema mode*/
 
 #product-overview{
-  background-color: var(--card-background);
+  background-color: var(--overview-background);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
@@ -116,16 +130,19 @@ gap:10px
 }
 
 :root{
-  --background-color: #ffffff;
-  --text-color: #333333;
-  --card-background: #f9f9f9;
-  --border-color: #dddddd;
+  --background-color: #EADDC8; 
+  --text-color: #3E3F25;
+  --card-background: #ffffff;
+  --overview-background: #F5EFE6;
+  --border-color: #d8cfc3;
 }
+
 
 .dark-theme{
   --background-color: #121212;
   --text-color: #f0f0f0;
   --card-background: #1e1e1e;
+  --overview-background: #2a2a2a;
   --border-color: #444444;
 }
 
