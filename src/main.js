@@ -83,6 +83,19 @@ async function fetchData() {
     <p>Type: ${product.product_type}</p>
      <p><strong>Beschrijving: </strong> ${product.description || "Geen beschrijving beschikbaar"}</p>
   `;
+
+  // Hier gaan we een ons favoriet eigenschap plaatsen en de harticoontje die we hebben opgehaald
+  const heartButton = document.createElement("button");
+  heartButton.classList.add("heart-button");
+
+  const isFavorite = checkIfFavorite(product.id);
+  heartButton.innerHTML = isFavorite
+  ? `<i class="fa-solid fa-heart" style="color: #e74c3c;"></i>`
+  :`<i class="fa-thin fa-heart" style="color: #ddd1bd;"></i>`;
+
+  heartButton.addEventListener("click", () => toggleFavorite(product.id,heartButton));
+  productCard.appendChild(heartButton);
+  
   dataList.appendChild(productCard);
     });
     
@@ -247,6 +260,38 @@ function loadFilters(){
     }catch(error){
       console.error("Error loading filters:", error);
     }
+  }
+
+  function getFavorites() {
+    const favorites = localStorage.getItem("favoriteProducts");
+    return favorites ? JSON.parse(favorites) : [];
+  }
+
+  function saveFavorites(favorites){
+    localStorage.setItem("favoriteProduct",JSON.stringify(favorites));
+  }
+
+  function checkIfFavorite(productId){
+    const favorites = getFavorites();
+    return favorites.includes(productId);
+  }
+
+  function toggleFavorite(productId,button){
+    let favorites = getFavorites();
+    const icon = button.querySelector("i");
+
+    if(favorites.includes(productId)){
+      favorites = favorites.filter(id => id !== productId);
+      icon.classList.remove("fa-solid");
+      icon.classList.add("fa-thin");
+      icon.style.color = "#ddd1bd";
+    }else{
+      favorites.push(productId);
+       icon.classList.remove("fa-solid");
+      icon.classList.add("fa-thin");
+      icon.style.color = "#e74c3c";
+    }
+    saveFavorites(favorites);
   }
 
 
