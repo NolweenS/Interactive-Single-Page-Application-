@@ -90,8 +90,8 @@ async function fetchData() {
 
   const isFavorite = checkIfFavorite(product.id);
   heartButton.innerHTML = isFavorite
-  ? `<i class="fa-solid fa-heart" style="color: #e74c3c;"></i>`
-  :`<i class="fa-thin fa-heart" style="color: #ddd1bd;"></i>`;
+  ? `<i class="fa-solid fa-heart" style="color: #ddd1bd;"></i>`
+  : `<i class="fa-regular fa-heart" style="color: #ddd1bd;"></i>`;
 
   heartButton.addEventListener("click", () => toggleFavorite(product.id,heartButton));
   productCard.appendChild(heartButton);
@@ -268,7 +268,7 @@ function loadFilters(){
   }
 
   function saveFavorites(favorites){
-    localStorage.setItem("favoriteProduct",JSON.stringify(favorites));
+    localStorage.setItem("favoriteProducts",JSON.stringify(favorites));
   }
 
   function checkIfFavorite(productId){
@@ -283,13 +283,13 @@ function loadFilters(){
     if(favorites.includes(productId)){
       favorites = favorites.filter(id => id !== productId);
       icon.classList.remove("fa-solid");
-      icon.classList.add("fa-thin");
+      icon.classList.add("fa-regular");
       icon.style.color = "#ddd1bd";
     }else{
       favorites.push(productId);
-       icon.classList.remove("fa-solid");
-      icon.classList.add("fa-thin");
-      icon.style.color = "#e74c3c";
+       icon.classList.remove("fa-regular");
+      icon.classList.add("fa-solid");
+      icon.style.color = "#ddd1bd";
     }
     saveFavorites(favorites);
   }
