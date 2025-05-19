@@ -27,6 +27,12 @@ const searchButton = document.getElementById("search-button");
 // De element voor de thema-selector
 const themaSelect = document.getElementById("thema-select");
 
+// we maken een element voor het weergeven van de favoriet-knop en home knop
+const showFavorites = document.getElementById("showFavorites");
+const showAll = document.getElementById("showAll");
+
+
+
 
 // we willen de data altijd opneiuw roepen das niet effciente dus we bewaren het data hier zodat we bij het filtreren,sorter,.. eenvoudiger data kunnen ophalen
 let allProducts = [];
@@ -294,6 +300,31 @@ function loadFilters(){
     saveFavorites(favorites);
   }
 
+   document.addEventListener("DOMContentLoaded",loadThemePreference);
+  document.addEventListener("DOMContentLoaded",loadFilters);
+
+
+// Favorieten knop klik laten functioneren
+showFavorites.addEventListener("click", () => {
+  const favorites = getFavorites(); // array met favorieten ids
+  const favoriteProducts = allProducts.filter(product => favorites.includes(product.id));
+  toonProducten(favoriteProducts);
+
+  // knop verbergen
+  showFavorites.style.display = "none";  
+   // 'toon alles' knop tonen
+  showAll.style.display = "inline-block";  
+});
+
+// Toon alles knop klik
+showAll.addEventListener("click", () => {
+  toonProducten(allProducts);
+
+  showAll.style.display = "none";
+  showFavorites.style.display = "inline-block";
+});
+
+
 
   // we zetten een event listener hier zodat de filteroptie kan veranderen en we geven aan dat we een verandering willen nadat we op het knop hebben geklikt, voegen onze event listener hier zodat al de mogelijke veranderingen samen worden gevoeg 
 
@@ -326,8 +357,7 @@ function loadFilters(){
     }
   });
 
-  document.addEventListener("DOMContentLoaded",loadThemePreference);
-  document.addEventListener("DOMContentLoaded",loadFilters);
+ 
 
 
 
