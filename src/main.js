@@ -37,6 +37,8 @@ const showAll = document.getElementById("showAll");
 // we willen de data altijd opneiuw roepen das niet effciente dus we bewaren het data hier zodat we bij het filtreren,sorter,.. eenvoudiger data kunnen ophalen
 let allProducts = [];
 
+//we gaan onze let showingfavorites globaal declareren anders werkt het niet als we het buiten een functie willen gebruiken
+let showingFavorites = false;
 
 async function fetchData() {
 
@@ -67,13 +69,24 @@ async function fetchData() {
     const countElement = document.getElementById("count");
     countElement.textContent = products.length;
 
-    //we gaan controleren of er een resultaat is 
-    const noResultsElement = document.getElementById("no-results");
-    if (products.length === 0){
-      noResultsElement.style.display = "block";
-    } else{
-      noResultsElement.style.display = "none";
-    }
+    //we gaan controleren of er een resultaat is/ we hebben een aanpassing gemaakt waarin 
+  const noResultsElement = document.getElementById("no-results");
+const noFavoritesElement = document.getElementById("no-favorites");
+
+if (products.length === 0) {
+  // Detecteer of we op favorieten zitten door te kijken of showAll zichtbaar is
+  if (showingFavorites) {
+    noFavoritesElement.style.display = "block";
+    noResultsElement.style.display = "none";
+  } else {
+    noFavoritesElement.style.display = "none";
+    noResultsElement.style.display = "block";
+  }
+} else {
+  noResultsElement.style.display = "none";
+  noFavoritesElement.style.display = "none";
+}
+
 
 // een forEach loop zodat het over alle producten gaat lopen 
     products.forEach(product => {
@@ -305,9 +318,10 @@ function loadFilters(){
 
 
 // Favorieten knop klik laten functioneren
-showFavorites.addEventListener("click", () => {
-  const favorites = getFavorites(); // array met favorieten ids
+showFavorites.addEventListener("click", () => { 
+  const favorites = getFavorites(); 
   const favoriteProducts = allProducts.filter(product => favorites.includes(product.id));
+  showingFavorites = true;
   toonProducten(favoriteProducts);
 
   // knop verbergen
@@ -318,6 +332,7 @@ showFavorites.addEventListener("click", () => {
 
 // Toon alles knop klik
 showAll.addEventListener("click", () => {
+  showingFavorites = false;
   toonProducten(allProducts);
 
   showAll.style.display = "none";
