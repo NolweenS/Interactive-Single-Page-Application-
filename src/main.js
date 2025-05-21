@@ -90,6 +90,16 @@ if (products.length === 0) {
 
 // een forEach loop zodat het over alle producten gaat lopen 
     products.forEach(product => {
+
+      // Hier gaan we onze kleuren bolletjes aan maken 
+      const kleurenHTML = product.product_colors.length > 0
+  ? `<div class="product-colors">` +
+      product.product_colors.map(color =>
+        `<span class="color-dot" style="background-color: ${color.hex_value}" title="${color.colour_name || color.hex_value}"></span>`
+      ).join("") +
+    `</div>`
+  : "<em>Geen kleuren beschikbaar</em>";
+
       const productCard = document.createElement("div");
       productCard.classList.add("product-card");
       // we zetten onze innerhtml die we in de vorige stap hebben gemaakt hier zodat de filteroptie hier op kan werken
@@ -100,10 +110,14 @@ if (products.length === 0) {
     <p>Prijs: €${product.price || "?"}</p>
     <p>Merk: ${product.brand}</p>
     <p>Type: ${product.product_type}</p>
+    // We gaan ze hier in onze product-card plaatsen zodat ze visueel te zien zijn
+    ${kleurenHTML}
      <p><strong>Beschrijving: </strong> ${product.description || "Geen beschrijving beschikbaar"}</p>
   `;
-
-  // Hier gaan we een ons favoriet eigenschap plaatsen en de harticoontje die we hebben opgehaald
+// We hebben hier een console geplaatst om zeker te zijn dat we met deze api de product kleuren kunnen ophalen 
+console.log(product.name,"heeft kleuren", product.product_colors)
+  
+// Hier gaan we een ons favoriet eigenschap plaatsen en de harticoontje die we hebben opgehaald
   const heartButton = document.createElement("button");
   heartButton.classList.add("heart-button");
 
