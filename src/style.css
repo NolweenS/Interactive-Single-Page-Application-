@@ -1,14 +1,35 @@
 /* De algemene pagina opstellen*/
 
+:root{
+  --background-color: #EADDC8; 
+  --text-color: #3E3F25;
+  --card-background: #ffffff;
+  --overview-background: #F5EFE6;
+  --border-color: #d8cfc3;
+}
+
+.dark-theme{
+  --background-color: #121212;
+  --text-color: #f0f0f0;
+  --card-background: #1e1e1e;
+  --overview-background: #2a2a2a;
+  --border-color: #444444;
+}
+
+
 body {
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 0;
+  margin: 0;
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.3s, color 0.3s;
+  display: flex;
+  flex-direction: column;
 }
 
-/* We gaan hier onze "product-overview" stylen er is een andere achtergrondkleur om een verschil te maken en een lichte shaduw */
+/* We gaan hier onze "product-overview" stylen er is een 
+andere achtergrondkleur om een verschil te maken en een lichte shaduw */
 
 #product-overview {
   max-width: 1200px;
@@ -16,6 +37,7 @@ body {
   padding: 20px;
   background-color: var(--overview-background);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  flex: 1;
 }
 
 /* Hier wordt de h1 'NYX Producten bewerkt '*/
@@ -25,10 +47,12 @@ body {
   color: #6c584c;
 }
 
-/* Hier gaan we onze grid layout aanmakenn, we gaan de kolommen laten repeat en zorgen dat de inhoud mooi samen blijft */
+/* Hier gaan we onze grid layout aanmakenn, 
+we gaan de kolommen laten repeat en zorgen dat de inhoud mooi samen blijft */
+
 #data-list{
 display: grid;
-grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
+grid-template-columns: repeat(auto-fit,minmax(250px,1fr));
 gap: 20px;
 padding: 20px;
 
@@ -40,12 +64,12 @@ button:hover{
   cursor: pointer;
 }
 
-
+/*Dit is de */
 #price-max ::-webkit-slider-thumb{
 background-color: #6c584c;
 }
  
-/* we hebben onze grid style gegeven en een transition bijgezet vor de hover-effect*/
+/* we hebben onze grid style gegeven en een transition bijgezet voor de hover-effect*/
 
 .product-card{
   border: 1px solid ;
@@ -56,6 +80,9 @@ background-color: #6c584c;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
   text-align: center;
 transition: transform 0.3s ease, box-shadow 0.3s ease;
+position: relative;
+ background-color: var(--card-background);
+  border: 1px solid var(--background-color);
 }
 
 /* we gaan een hover effect maken zodat we met de muis erover kunnen gaan*/
@@ -71,11 +98,11 @@ transition: transform 0.3s ease, box-shadow 0.3s ease;
 .product-card img{
   max-width: 100%;
   height: auto;
-  object-fit: cover;
+  object-fit:cover;
   border-radius: 5px;
 }
 
-/* We hebben titel een mooier layout gegeven */
+/* We hebben titel "h1" een mooier layout gegeven */
 .product-card h3 {
   font-size: 1.5em;
 color: #6c584c;
@@ -84,23 +111,15 @@ margin: 10px;
 
 /* Hier wordt de h1 'NYX Producten bewerkt '*/
 .product-card p{
-
   font-size: 0.9em;
   line-height: 1.4;
-
 }
 
 .product-card p strong{
   font-weight: bold;
-  
 }
 
 /* Hier komen de eigenschappen voor de thema mode*/
-
-#product-overview{
-  background-color: var(--overview-background);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
 
 #thema-select, #search-input, #filter-type, #price-max {
   background-color: var(--background-color);
@@ -112,6 +131,9 @@ button {
   background-color: var(--card-background);
   color: var(--text-color);
   border: 1px solid var(--border-color);
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor:pointer;
 }
 
 .theme-selector{
@@ -128,35 +150,6 @@ gap:10px
   background-color: var(--background-color);
   color: var(--text-color);
 }
-
-:root{
-  --background-color: #EADDC8; 
-  --text-color: #3E3F25;
-  --card-background: #ffffff;
-  --overview-background: #F5EFE6;
-  --border-color: #d8cfc3;
-}
-
-
-.dark-theme{
-  --background-color: #121212;
-  --text-color: #f0f0f0;
-  --card-background: #1e1e1e;
-  --overview-background: #2a2a2a;
-  --border-color: #444444;
-}
-
-body{
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: background-color 0.3s, color 0.3s;
-}
-
-.product-card{
-  background-color: var(--card-background);
-  border: 1px solid var(--background-color);
-}
-
 
 /*We gaan hier onze harticoon voor de favorieten stylen */
 button.heart-button{
@@ -180,9 +173,6 @@ button.heart-button:hover i {
 }
 
 /* we gaan onze hart boven aan de rechterkant van het product-card zetten*/
-.product-card{
-  position: relative;
-}
 
 .product-colors{
   margin-top: 0.5em;
@@ -199,6 +189,105 @@ button.heart-button:hover i {
   border: 1px solid #ccc;
   cursor: pointer;
 }
+
+.controls{
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.search-bar{
+  display: flex;
+  gap:10px;
+}
+
+.search-bar input{
+  flex:1;
+  padding:8px;
+  border-radius: 4px;
+}
+
+.top-controls {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 15px 20px 0;
+}
+
+.filter-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  gap: 10px;
+  margin: 5px;
+}
+
+.midden-zoekbalk {
+  text-align:end;
+  padding-bottom: 40px;
+}
+#search-container {
+  display: inline-block;
+}
+
+
+.filter-left{
+  display:flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-midden {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.filter-right{
+display: flex;
+flex-wrap:wrap;
+align-items: center;
+gap: 6em;
+}
+
+.favorites-controls{
+  display:flex;
+  gap:10px;
+}
+
+.resluts.info{
+  margin: 15px 0;
+}
+
+
+#main-footer {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  text-align: center;
+  padding: 20px 10px;
+  font-size: 0.9em;
+  margin-top: 40px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+#main-footer a:hover{
+  text-decoration: underline;
+}
+
+#github-link i{
+  margin-right: 5px;
+}
+
+html,body{
+  height: 100%;
+}
+
+
 
 
 
@@ -217,7 +306,7 @@ button.heart-button:hover i {
   .product-card {
     font-size: 15px;
     padding: 10px;
-  margin: 20px;;
+  margin: 10px 0;
   }
 
   .product-card img {
@@ -225,12 +314,19 @@ button.heart-button:hover i {
 
   }
 
-
+  .filter-bar{
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
 }
   
 
 @media  (min-width:601px ) and (max-width:900px){
+
+  body{
+    padding:10px;
+  }
   
   #data-list{
     grid-template-columns: repeat(2,1fr);
