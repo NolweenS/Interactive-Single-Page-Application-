@@ -12,9 +12,31 @@
 <body>
   <!-- we maken een div zodat we flexibel kunnen omgaan en een grid toevoegen-->
   <div id="product-overview">
-    <h1>NYX PRODUCTEN </h1>
+
+         <div class="top-controls">
+          
+<!--We laken hier onze homeknop en favorieten knop-->
+       <button id="showFavorites"> Favorieten</button>
+      <button id="showAll" style="display: none;">Home</button>
+</div>
+    
+
+
+   
+
+      <!--We gaan hier onze thema schakelaar toevoegen-->
+
+       <div class="thema-selector">
+        <label for="thema-select"> Thema: </label>
+        <select id="thema-select">
+          <option value="light"> Light </option>
+          <option value="dark">dark</option>
+        </select>
+       </div>
+       <h1>NYX PRODUCTEN </h1>
 
     <!-- We gaan hier onze zoekbalk plaatsen -->
+     <div class="midden-zoekbalk">
     <div id="search-container">
       <input type="text" id="search-input" placeholder=" Zoek product...">
       <button id="search-button"> Zoeken</button>
@@ -22,7 +44,7 @@
 
      <!-- We gaan onze aantal resultaten optellen en bijhouden-->
       <div id="results-counter">Resultaten: <span id="count">0</span></div>
-
+</div>
        <!--Geen resultatt bericht-->
        <div id="message-container">
   <div id="no-results" style="display: none;">
@@ -34,21 +56,14 @@
 </div>
 
 
-       <!--We gaan hier onze thema schakelaar toevoegen-->
-
-       <div class="thema-selector">
-        <label for="thema-select"> Thema: </label>
-        <select id="thema-select">
-          <option value="light"> Light </option>
-          <option value="dark">dark</option>
-        </select>
-       </div>
+     
 
 
 
     <!-- We gaan hier onze filteroptie zetten, waarin we de producten zullen filteren op 'type' product-->
 
-    <div id="filter-bar">
+    <div id="filter-bar" class="filter-bar">
+<div class="filter-left">
       <label for="filter-type"> Filter op type: </label>
 
       <select id="filter-type">
@@ -65,17 +80,17 @@
         <option value="eyeliner">Eyeliner</option>
 
       </select>
-
+      </div>
+<div class="filter-midden">
       <label for="price-max"> Maximale prijs: € <span id="max-price-value"> 20</span></label>
       <input type="range" id="price-max" min="0" max="20" step="1" value=" 20">
       <button id="apply-filter"> Apply Filter </button>
+      </div>
+      <div class="filter-right">
       <button id="sort-price-low-high">Sort lowest price </button>
       <button id="reset-button"> Reset</button>
-
-<!--We laken hier onze homeknop en favorieten knop-->
+</div>
       
-      <button id="showFavorites"> Favorieten</button>
-      <button id="showAll" style="display: none;">Home</button>
 
     </div>
     <div id="data-list"></div>
@@ -88,5 +103,14 @@
   <script type="module" src="./src/main.js"></script>
 
 </body>
+<footer id="main-footer">
+  <p>Interactive Single Page Application – Advanced Web Project</p>
+  <p>Gemaakt door Nolween Sine | © 2025</p>
+  <p>
+    <a href="https://github.com/NolweenS/Interactive-Single-Page-Application-" target="_blank" id="github-link">
+      <i class="fab fa-github"></i> Bekijk op GitHub
+    </a>
+  </p>
+</footer>
 
 </html>

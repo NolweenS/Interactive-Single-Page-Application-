@@ -105,12 +105,12 @@ if (products.length === 0) {
       // we zetten onze innerhtml die we in de vorige stap hebben gemaakt hier zodat de filteroptie hier op kan werken
   productCard.innerHTML = `
 
-    <img src = "${product.image_link || "public\placeholder_300x150.jpg"}" alt= "${product.name}" width="100" />
+    <img src = "${product.image_link || "public\placeholder_300x150.jpg"}" alt= "${product.name}" width="300" />
     <h3>${product.name}</h3>
     <p>Prijs: €${product.price || "?"}</p>
     <p>Merk: ${product.brand}</p>
     <p>Type: ${product.product_type}</p>
-    // We gaan ze hier in onze product-card plaatsen zodat ze visueel te zien zijn
+    <!-- We gaan ze hier in onze product-card plaatsen zodat ze visueel te zien zijn-->
     ${kleurenHTML}
      <p><strong>Beschrijving: </strong> ${product.description || "Geen beschrijving beschikbaar"}</p>
   `;
