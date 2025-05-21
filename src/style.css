@@ -184,6 +184,22 @@ button.heart-button:hover i {
   position: relative;
 }
 
+.product-colors{
+  margin-top: 0.5em;
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.color-dot{
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
 
 
 /* Hier gaan we de media queries maken om de web pagina responsive te maken*/
