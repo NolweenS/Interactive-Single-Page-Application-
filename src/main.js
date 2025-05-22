@@ -47,7 +47,7 @@ let showingFavorites = false;
 let huidigeProducten = [];
 
 
-// We gaan data ophalen van onze nyx-API
+// We gaan data ophalen van onze NYX-API
 async function fetchData() {
 
      try{
@@ -118,7 +118,10 @@ if (products.length === 0) {
       // we zetten onze innerhtml die we in de vorige stap hebben gemaakt hier zodat de filteroptie hier op kan werken
   productCard.innerHTML = `
 
-    <img src = "${product.image_link || "public/placeholder_300x150.jpg"}" alt= "${product.name}" width="300" />
+  <img loading="lazy" 
+     src="${product.image_link || 'public/placeholder_300x150.jpg'}" 
+     alt="${product.name}" width="300"
+     onerror="this.onerror=null;this.src='public/placeholder_300x150.jpg';" />
     <h3>${product.name}</h3>
     <p>Prijs: €${product.price || "?"}</p>
     <p>Merk: ${product.brand}</p>
