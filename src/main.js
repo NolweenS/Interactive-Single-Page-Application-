@@ -40,6 +40,9 @@ let allProducts = [];
 //we gaan onze let showingfavorites globaal declareren anders werkt het niet als we het buiten een functie willen gebruiken
 let showingFavorites = false;
 
+// we maken deze variabele zodat we bij het filteren van de producten bv. kunnen  sorteren op de filters zelf en niet all de producten laten filteren 
+let huidigeProducten = [];
+
 async function fetchData() {
 
      try{
@@ -62,6 +65,8 @@ async function fetchData() {
   }
 
   function toonProducten(products){
+    //Hier geven we aan dat wanneer we het hebben over products, het over de huidige producten gaat
+    huidigeProducten = products;
     console.log("Showing products:",products.length);
     dataList.innerHTML = ""; //geen spatie
 
@@ -105,7 +110,7 @@ if (products.length === 0) {
       // we zetten onze innerhtml die we in de vorige stap hebben gemaakt hier zodat de filteroptie hier op kan werken
   productCard.innerHTML = `
 
-    <img src = "${product.image_link || "public\placeholder_300x150.jpg"}" alt= "${product.name}" width="300" />
+    <img src = "${product.image_link || "public/placeholder_300x150.jpg"}" alt= "${product.name}" width="300" />
     <h3>${product.name}</h3>
     <p>Prijs: €${product.price || "?"}</p>
     <p>Merk: ${product.brand}</p>
@@ -238,18 +243,54 @@ maxPriceValue.textContent = maxPrice;
 
 }
 
-//We sorteren op prijs van kleinste prijs naar hoogtse prijs 
+//We sorteren op prijs van goedkoopste naar duurste 
  function sorteerPrijsLaagste(){
-    const sorted = [...allProducts].sort((a,b) =>{
+    const sorted = [...huidigeProducten].sort((a,b) =>{
     const prijsA = parseFloat(a.price);
     const prijsB = parseFloat(b.price);
+    // We gaan de producten met ongeldige prijs helemaal benenden zetten
     if(isNaN(prijsA)) 
       return 1;
     if (isNaN(prijsB))
       return -1;
+    //We vergelijken de prijzen numeriek met elkaar
     return prijsA-prijsB;
   });
 toonProducten(sorted);
+  }
+
+  // we gaan hier een nieuwe functie maken zodat we de zoekter,typefilter en prijsfilter allemaal de zelfde functie geven
+  // Deze functie gaat ons helpen om te kunnen sorteren op de huidige producten en niet alleen alle producten samen 
+
+  function zetFiltersEnZoek(){
+
+    const zoekTerm = searchInput.value.toLowerCase();
+    const selectedType = filterType.value;
+    const maxPrice = parseFloat(priceMaxInput.value);
+
+    let gefilterd = allProducts;
+
+// We passen de zoekfilter aan 
+    if(zoekTerm !==""){
+      gefilterd = gefilterd.filter(product =>{
+        const nameMatch = product.name?.toLowerCase().includes(zoekTerm) || false;
+      const descMatch = product.description?.toLowerCase().includes(zoekTerm) || false;
+      const typeMatch = product.product_type?.toLowerCase().includes(zoekTerm) || false;
+      return nameMatch || descMatch || typeMatch;
+      });
+    }
+
+    //We passen het typefilter aan 
+     if (selectedType) {
+    gefilterd = gefilterd.filter(product => product.product_type === selectedType);
+  }
+
+  //We passen de prijsfilter aan 
+  gefilterd = gefilterd.filter(product => {
+    const prijs = parseFloat(product.price);
+    return !isNaN(prijs) && prijs <= maxPrice;
+  });
+  toonProducten(gefilterd);
   }
 
 
@@ -281,7 +322,7 @@ function loadFilters(){
     if(savedFilters){
       const filters = JSON.parse(savedFilters);
 
-      if(filterType.productType){
+      if(filters.productType){
         filterType.value = filters.productType;
       }
       if (filters.maxPrice){
