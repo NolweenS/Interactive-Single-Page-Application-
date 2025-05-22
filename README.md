@@ -199,7 +199,7 @@ Als je een lokale server wilt gebruiken (aanbevolen voor ontwikkeling), kun je b
  - [ChatGPT](https://chatgpt.com/c/682b8097-22b0-8008-82e7-e52b040018b2)
  - [ChatGPT](https://chatgpt.com/c/6822200d-1568-8008-b2e6-fa88ee044503)
  - [CHatGPT](https://chatgpt.com/c/682efe80-5454-8008-9f1b-7d855c80f786)
- - [CHatGPT]https://chatgpt.com/c/682ed067-d8dc-8008-b278-764e846a3816
+ - [CHatGPT](https://chatgpt.com/c/682ed067-d8dc-8008-b278-764e846a3816)
  - [CHatGPT](https://chatgpt.com/c/682ec0b7-b440-8008-a555-173d90328024)
 
  ## Auteur Nolween Sine
