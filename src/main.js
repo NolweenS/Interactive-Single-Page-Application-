@@ -1,9 +1,11 @@
-
+// We laden onze style.css hier 
 import "./style.css"
 
 
-// API ophalen: We maken hem constant en daar gaan we onze adres bewaren van de API waar we data ophalen
+// API ophalen: We maken hem constant en daar gaan we onze adres bewaren van de API-endpoint, waar we data ophalen
 const API_URL = "http://makeup-api.herokuapp.com/api/v1/products.json?brand=nyx";
+
+// Hier spreken we onze HTML-elementen aan
 
 // Hier gaan we onze "data-list" in onze HTML aanspreken, om daar de producten van de data te plaatsen
 const dataList = document.getElementById("data-list");
@@ -12,6 +14,7 @@ const dataList = document.getElementById("data-list");
 
 const filterType = document.getElementById("filter-type");
 
+// Hier maken we een constant voor onze prijsfilter
 const priceMaxInput = document.getElementById("price-max");
 const maxPriceValue = document.getElementById("max-price-value");
 const applyFilterButton = document.getElementById("apply-filter");
@@ -32,7 +35,7 @@ const showFavorites = document.getElementById("showFavorites");
 const showAll = document.getElementById("showAll");
 
 
-
+//Dti zijn de variabele voor onze data en status 
 
 // we willen de data altijd opneiuw roepen das niet effciente dus we bewaren het data hier zodat we bij het filtreren,sorter,.. eenvoudiger data kunnen ophalen
 let allProducts = [];
@@ -43,6 +46,8 @@ let showingFavorites = false;
 // we maken deze variabele zodat we bij het filteren van de producten bv. kunnen  sorteren op de filters zelf en niet all de producten laten filteren 
 let huidigeProducten = [];
 
+
+// We gaan data ophalen van onze nyx-API
 async function fetchData() {
 
      try{
@@ -64,17 +69,19 @@ async function fetchData() {
     
   }
 
+  //We gaan hier onze API producten laten ophalen in een lijst
+
   function toonProducten(products){
     //Hier geven we aan dat wanneer we het hebben over products, het over de huidige producten gaat
     huidigeProducten = products;
     console.log("Showing products:",products.length);
     dataList.innerHTML = ""; //geen spatie
 
-    // We gaan de reultaat teller updaten na zoek resultaat
+    // We gaan de reultaat teller updaten na het zoeken van de resultaat
     const countElement = document.getElementById("count");
     countElement.textContent = products.length;
 
-    //we gaan controleren of er een resultaat is/ we hebben een aanpassing gemaakt waarin 
+    //we gaan controleren of er een resultaat is
   const noResultsElement = document.getElementById("no-results");
 const noFavoritesElement = document.getElementById("no-favorites");
 
@@ -94,6 +101,7 @@ if (products.length === 0) {
 
 
 // een forEach loop zodat het over alle producten gaat lopen 
+//We gaan HTML genereren voor elk product
     products.forEach(product => {
 
       // Hier gaan we onze kleuren bolletjes aan maken 
@@ -140,7 +148,7 @@ console.log(product.name,"heeft kleuren", product.product_colors)
 
   }
 
-  // Hier komt de functie om van thema te veranderen 
+  // Hier komt de functie om van thema (licht/donker) te veranderen 
   function changeTheme(){
     console.log("thema wordt gewijzigd naar:",themaSelect.value);
     if(themaSelect.value === "dark"){
@@ -152,10 +160,9 @@ console.log(product.name,"heeft kleuren", product.product_colors)
   localStorage.setItem("theme-preference", themaSelect.value);
   }
 
-  // Event listener voor de thema-selector
-  themaSelect.addEventListener("change",changeTheme)
 
-  //We maken een functie om de opgelasgen voorkeur bij het laden van de pagina
+
+  //We maken een functie om de opgelasgen voorkeur bij het laden van de pagina bij te houden
 
   function loadThemePreference(){
     const savedTheme = localStorage.getItem("theme-preference");
@@ -167,10 +174,9 @@ console.log(product.name,"heeft kleuren", product.product_colors)
         document.body.classList.add("dark-theme");
       }
     }
-
   }
 
-  // hier gaan de onze functie voor de zoekbalk weergeven 
+  // hier gaan we onze functie voor de zoek producten weergeven 
   function zoekProducten(){
     const zoekTerm = searchInput.value.toLowerCase();
     console.log("zoekTerm:",zoekTerm);
@@ -189,8 +195,7 @@ console.log(product.name,"heeft kleuren", product.product_colors)
    const typeMatch = product.product_type ? product.product_type.toLowerCase().includes(zoekTerm) : false;
  
    return nameMatch || descMatch || typeMatch;
-
-    });
+ });
 
     console.log("producten na zoeken filter:", gezochteProducten.map(product => product.product_type));
     
@@ -215,7 +220,7 @@ console.log(product.name,"heeft kleuren", product.product_colors)
   }
 
 
-  // Hier maken we een filteroptie waarin we een schuifbalk gebruiken voor onze minimun -en maximum prijs en de filter op type product wordt hier bij gezet
+  // Hier maken we een filteroptie waarin we een schuifbalk gebruiken voor onze maximum prijs en de filter op type product wordt hier bij gezet
 function zetFilters(){
 
  
@@ -236,11 +241,7 @@ maxPriceValue.textContent = maxPrice;
     }
   );
 
- 
-
   toonProducten(filtered);
-
-
 }
 
 //We sorteren op prijs van goedkoopste naar duurste 
@@ -299,12 +300,12 @@ toonProducten(sorted);
     priceMaxInput.value = priceMaxInput.max; //onze schuifbalk resetten
     maxPriceValue.textContent = priceMaxInput.max;
     searchInput.value = "" //zoekbalk resetten
-    toonProducten(allProducts);
+    zetFiltersEnZoek();
     saveFilters();
 }
 
 
-// we maken een functie om de filters van de gebruiker op te slaan 
+// we maken een functie om de filters van de gebruiker op te slaan  in localStorage
 function saveFilters(){
   const filters = {
     productType: filterType.value,
@@ -336,20 +337,24 @@ function loadFilters(){
     }
   }
 
+  //We halen de favorieten uit de localStorage 
   function getFavorites() {
     const favorites = localStorage.getItem("favoriteProducts");
     return favorites ? JSON.parse(favorites) : [];
   }
 
+  //We gaan de favorieten opslaan in localStorage
   function saveFavorites(favorites){
     localStorage.setItem("favoriteProducts",JSON.stringify(favorites));
   }
 
+  //we controleren of een product in de favorieten zit 
   function checkIfFavorite(productId){
     const favorites = getFavorites();
     return favorites.includes(productId);
   }
 
+  //Hier gaan we  de stauts van een favoriet kunnen wisselen 
   function toggleFavorite(productId,button){
     let favorites = getFavorites();
     const icon = button.querySelector("i");
@@ -368,11 +373,15 @@ function loadFilters(){
     saveFavorites(favorites);
   }
 
-   document.addEventListener("DOMContentLoaded",loadThemePreference);
-  document.addEventListener("DOMContentLoaded",loadFilters);
+
+   
+//Hier komen onze event listeners acties die de gebruiker kan verichten en wat de gewenste resultaten moeten zijn 
 
 
-// Favorieten knop klik laten functioneren
+// Thema bij wijziging
+themaSelect.addEventListener("change", changeTheme);
+
+// Favorieten knop klik en laten tonen
 showFavorites.addEventListener("click", () => { 
   const favorites = getFavorites(); 
   const favoriteProducts = allProducts.filter(product => favorites.includes(product.id));
@@ -381,11 +390,12 @@ showFavorites.addEventListener("click", () => {
 
   // knop verbergen
   showFavorites.style.display = "none";  
-   // 'toon alles' knop tonen
+  
+  // 'toon alles' knop tonen
   showAll.style.display = "inline-block";  
 });
 
-// Toon alles knop klik
+// Toon alles knop klikken
 showAll.addEventListener("click", () => {
   showingFavorites = false;
   toonProducten(allProducts);
@@ -394,39 +404,54 @@ showAll.addEventListener("click", () => {
   showFavorites.style.display = "inline-block";
 });
 
+//Onze resetknop
+document.getElementById("reset-button").addEventListener("click", () => {
+  resetFilters();
+});
 
 
-  // we zetten een event listener hier zodat de filteroptie kan veranderen en we geven aan dat we een verandering willen nadat we op het knop hebben geklikt, voegen onze event listener hier zodat al de mogelijke veranderingen samen worden gevoeg 
+
+  //We zetten een event listener hier zodat de filteroptie kan veranderen en we geven aan dat we een verandering willen nadat we op het knop hebben geklikt, voegen onze event listener hier zodat al de mogelijke veranderingen samen worden gevoeg 
 
   priceMaxInput.addEventListener("input", () => {
     maxPriceValue.textContent = priceMaxInput.value});
     
     priceMaxInput.addEventListener("change", () =>{
-      zetFilters();
+      zetFiltersEnZoek();
       saveFilters();
     })
 
+// Filter opties toepassen 
   applyFilterButton.addEventListener("click", 
     () => {zetFilters();
   saveFilters();
 });
 
 
+//Product filter aanduiden
   filterType.addEventListener("change", ()=>{zetFilters();
+    zetFiltersEnZoek();
     saveFilters();
   });
 
   
-
+//Sorteren op prijs
   sortPriceButton.addEventListener("click",sorteerPrijsLaagste);
-  resetButton.addEventListener("click",resetFilters);
+
+  //De reset knop om de filter opties te annuleren 
+  resetButton.addEventListener("click",zetFiltersEnZoek);
+
+  //De zoekbar en zoekknop
   searchButton.addEventListener("click",zoekProducten);
   searchInput.addEventListener("keyup", function(event){
     if(event.key === "Enter"){
-      zoekProducten();
+      zetFiltersEnZoek();
     }
   });
 
+  //Thema en filters laden bij de start 
+  document.addEventListener("DOMContentLoaded",loadThemePreference);
+  document.addEventListener("DOMContentLoaded",loadFilters);
  
 
 
