@@ -4,28 +4,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Mijn Eeerste Project</title>
-  <!--Hier plaatsen we de link voor onze harticoon-->
+    <title>Mijn Eerste Project</title>
+  <!--Hier plaatsen we de link voor onze harticoon en de browser logo-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="icon" href="public/makeup.png" type="image/png">
 
 </head>
 
 <body>
-  <!-- we maken een div zodat we flexibel kunnen omgaan en een grid toevoegen-->
+  <!-- we maken een div zodat we flexibel kunnen omgaan en een grid toevoegen, dit wordt de hoofdcontainer voor volledige inhoud-->
   <div id="product-overview">
 
-         <div class="top-controls">
-          
-<!--We laken hier onze homeknop en favorieten knop-->
+         <div class="top-controls"> 
+<!--We maken hier onze homeknop en favorieten knop-->
        <button id="showFavorites"> Favorieten</button>
       <button id="showAll" style="display: none;">Home</button>
 </div>
     
-
-
-   
-
       <!--We gaan hier onze thema schakelaar toevoegen-->
 
        <div class="thema-selector">
@@ -35,19 +30,21 @@
           <option value="dark">dark</option>
         </select>
        </div>
+
+       <!--De titel van pagina-->
        <h1>NYX PRODUCTEN </h1>
 
-    <!-- We gaan hier onze zoekbalk plaatsen -->
+    <!-- We gaan hier onze zoekbalk plaatsen en onze resultatenaantal -->
      <div class="midden-zoekbalk">
     <div id="search-container">
       <input type="text" id="search-input" placeholder=" Zoek product...">
       <button id="search-button"> Zoeken</button>
     </div>
-
-     <!-- We gaan onze aantal resultaten optellen en bijhouden-->
+ <!-- We gaan onze aantal resultaten optellen en bijhouden-->
       <div id="results-counter">Resultaten: <span id="count">0</span></div>
 </div>
-       <!--Geen resultatt bericht-->
+      
+<!--Geen resultatt bericht-->
        <div id="message-container">
   <div id="no-results" style="display: none;">
     <p>Geen producten gevonden die aan je zoekcriteria voldoen</p>
@@ -57,15 +54,11 @@
   </div>
 </div>
 
+ <!-- We gaan hier onze filteroptie zetten, waarin we de producten zullen filteren op 'type' product-->
 
-     
-
-
-
-    <!-- We gaan hier onze filteroptie zetten, waarin we de producten zullen filteren op 'type' product-->
-
-    <div id="filter-bar" class="filter-bar">
-<div class="filter-left">
+    <div id="filter-bar" class="filter-bar"> <!--Hier is onze filter balk met type filter,prijs, sorteringen onze resetknop-->
+<!--Filter op type optie-->
+      <div class="filter-left">
       <label for="filter-type"> Filter op type: </label>
 
       <select id="filter-type">
@@ -83,23 +76,23 @@
 
       </select>
       </div>
+      <!--Maximale prijs filter-->
 <div class="filter-midden">
       <label for="price-max"> Maximale prijs: € <span id="max-price-value"> 20</span></label>
       <input type="range" id="price-max" min="0" max="20" step="1" value=" 20">
       <button id="apply-filter"> Apply Filter </button>
       </div>
+      <!--De sorteer en reset knoppen-->
       <div class="filter-right">
       <button id="sort-price-low-high">Sort lowest price </button>
       <button id="reset-button"> Reset</button>
 </div>
-      
-
-    </div>
-    <div id="data-list"></div>
-
-  </div>
+       </div>
+       <!--Hier komen de producten in een grid tevoorschijn-->
+    <div id="data-list">
+ </div>
   
-
+<!--Hier is de footer met projectinformatie en GitHub link-->
 <footer id="main-footer">
   <p>Interactive Single Page Application – Advanced Web Project</p>
   <p>Gemaakt door Nolween Sine | © 2025</p>
@@ -110,6 +103,7 @@
   </p>
 </footer>
 
+<!--Hier is de JavaScript module-->
   <script type="module" src="./src/main.js"></script>
 
 </body>
