@@ -68,7 +68,7 @@ De applicatie is volledig responsive en past zich aan verschillende schermformat
 ### JavaScript Features
 - **Implementatie**: De applicatie maakt gebruik van moderne JavaScript-features zoals arrow functions, template literals, destructuring, en async/await.
 - **Locatie in code**:
-  - Arrow functions: `main.js` (regel 142, 192, 207-211, 235-238,249, 276-286, 290, 363, 385-399, 416_432)
+  - Arrow functions: `main.js` (regel 142, 192, 207-211, 235-238,249, 276-286, 290, 363, 385-399, 416-432)
   - Template literals: `main.js` (regel 109-119,139-140)
   - Async/await: `main.js` (regel 51_70)
   - constante: `main.js` (regel 6-35, bij de functies)
